@@ -36,4 +36,17 @@ class Pantry
     @cookbook << recipe
   end
 
+  def what_can_i_make
+    make = []
+    @cookbook.each do |recipe|
+      recipe.ingredients.all? do |item, quantity|
+        if recipe.ingredients[item] <= @stock[item]
+          make << recipe.name
+        else
+          recipe.name
+        end
+      end
+    end
+    make
+  end
 end
